@@ -73,9 +73,15 @@ function startGame() {
     gameLoop(nextRandom.nextIndex,nextRandom.nextDelay)
 }
 
+let clearAllTimers = () => {
+    clearTimeout(moleTimeoutID)
+    clearTimeout(moleAnimationTimeoutID)
+    clearInterval(remainingTimerID)
+}
+
 let endGame = (win) => {
     running = false
-    clearInterval(remainingTimerID)
+    clearAllTimers()
     let message = win ?  "You Win!" : "You Lose"
     gameTimer.textContent = message
 }
@@ -92,7 +98,7 @@ function gameLoop(nextIndex,nextDelay){
                     let nextRandom = mole.setNextRandom()
                     gameLoop(nextRandom.nextIndex,nextRandom.nextDelay)    
                     },
-                    1000
+                    800
                 )
             },
             nextDelay * 1000
